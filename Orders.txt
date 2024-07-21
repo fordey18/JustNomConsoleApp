@@ -1,6 +1,8 @@
 Order Details:
+Margherita - £5.00
+Margherita - £5.00
+Plain Burger - £3.00
 Ham and Mushroom - £6.00
-Ham and Mushroom - £6.00
-Total: £12.00
-Name for the Order is : Archie
-Delivery Order, Address is: 10 Dunkirk rise
+Total: £19.00
+Name for the Order is : Archie Forde
+Delivery Order, Address is: 10 Dunkirk Rise

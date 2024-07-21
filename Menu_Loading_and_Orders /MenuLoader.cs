@@ -67,7 +67,6 @@ public class MenuLoader
 
 
             var foodItems = new List<FoodItem>();
-            var IngredientItem = new IngredientItem();
             
             for (int i = 1; i < lines.Length; i++)
             {

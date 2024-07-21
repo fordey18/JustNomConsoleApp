@@ -173,6 +173,7 @@ class Program
             Console.WriteLine("\nChoose an item by number to add.\nType 'Done' to finish selecting your items.\nType 'Order' to view your current order.\nType 'Remove' to remove an item.\nType 'address' to change the delivery address.\nType 'Name' to change the name for the order.\nType 'Menu' to allow selection of items again.\nType 'Exit' to exit the application.\n");
         }
 
+        // Remove item function holds the code to remove items from the current order.
         static void RemoveItemFromOrder(Order order)
         {
             Console.WriteLine("\nCurrent Order:\n");
@@ -196,6 +197,8 @@ class Program
             }
 
         }
+
+        // Display order function holds all the code to display whatever the current order is the user has selected and saved.
 
         static void DisplayOrder(Order order) 
         {
