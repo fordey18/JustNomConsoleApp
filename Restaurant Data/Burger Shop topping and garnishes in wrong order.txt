@@ -1,0 +1,6 @@
+Name:Burger Shop topping and garnishes in wrong order
+
+Garnishes:[]
+
+Toppings:[]
+Burger:<Name:Plain Burger,Garnishes:[],Price:350>

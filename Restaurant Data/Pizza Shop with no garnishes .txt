@@ -1,0 +1,3 @@
+Name:Boring Pizza Shop with no garnishes 
+Toppings:[<cheese,80>,<tomato sauce,40>]
+Pizza:<Name:Margherita,Toppings:[tomato sauce, cheese],Price:500>
