@@ -1,11 +1,11 @@
 namespace JustNomConsoleApp;
 
-public class Topping : Ingredient
+public class Topping : FoodItem
 {
     private string _name;
-    private int _price;
+    private decimal _price;
 
-    public Topping(string name, int price) : base(name, price)
+    public Topping(string name, decimal price) : base(name, price)
     {
         _name = name;
         _price = price;

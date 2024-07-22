@@ -1,10 +1,10 @@
 namespace JustNomConsoleApp;
 
-public class Garnish : Ingredient
+public class Garnish : FoodItem
 {
     private string _name;
-    private int _price;
-    public Garnish(string name, int price): base(name, price)
+    private decimal _price;
+    public Garnish(string name, decimal price): base(name, price)
     {
         _name = name;
         _price = price;

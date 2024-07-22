@@ -150,28 +150,17 @@ class Program
 
         static void DisplayMenu(Restaurant restaurant )
         {
-            Console.WriteLine($"Menu for {restaurant.Name}:");
+            Console.WriteLine($"Menu for {restaurant.Name}:\n");
+    
             for (int i = 0; i < restaurant.MenuItems.Count; i++)
             {
                 FoodItem item = restaurant.MenuItems[i];
                 Console.WriteLine($"{i + 1}. {item.Name} - £{item.Price:F2}");
-                if (item is Pizza pizza) 
-                {
-                    foreach (var topping in pizza.Toppings) 
-                    {
-                       Console.WriteLine($" + {topping}"); 
-                    }
-                }
-                else if (item is Burger burger) 
-                {
-                    foreach (var garnish in burger.Garnishes) 
-                    {
-                        Console.WriteLine($" + {garnish}");
-                    }
-                }
             }
-            Console.WriteLine("\nChoose an item by number to add.\nType 'Done' to finish selecting your items.\nType 'Order' to view your current order.\nType 'Remove' to remove an item.\nType 'address' to change the delivery address.\nType 'Name' to change the name for the order.\nType 'Menu' to allow selection of items again.\nType 'Exit' to exit the application.\n");
-        }
+            
+                
+        Console.WriteLine("\nChoose an item by number to add.\nType 'Done' to finish selecting your items.\nType 'Order' to view your current order.\nType 'Remove' to remove an item.\nType 'address' to change the delivery address.\nType 'Name' to change the name for the order.\nType 'Menu' to allow selection of items again.\nType 'Exit' to exit the application.\n");
+    }
 
         // Remove item function holds the code to remove items from the current order.
         static void RemoveItemFromOrder(Order order)
@@ -254,9 +243,10 @@ class Program
                     Console.WriteLine("Delivery Charge: £0.00");
                     Console.WriteLine($"Total: £{order.Total:F2}");
                 }
-                }
+                
             }
         }
+    }
     
 
     

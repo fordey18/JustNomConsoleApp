@@ -65,16 +65,38 @@ public class MenuLoader
                 return null;
             }
 
+            
+
 
             var foodItems = new List<FoodItem>();
+            var toppings = new List<Topping>();
+            var garnishes = new List<Garnish>();
             
             for (int i = 1; i < lines.Length; i++)
             {
                 string line = lines[i].Trim();
 
-                if (line.StartsWith("Pizza:"))
+                if (line.StartsWith("Toppings:"))
                 {
-                    var pizza = ParsePizzaData(line.Substring(6).Trim());
+                    var toppingsList = ParseToppingData(line.Substring("Toppings:".Length).Trim());
+                    foreach (var topping in toppingsList)
+                    {
+                        foodItems.Add(topping);  
+                    }
+                }
+
+                else if (line.StartsWith("Garnishes:"))
+                {
+                    var GarnishList = ParseGarnishData(line.Substring("Garnishes:".Length).Trim());
+                    foreach (var garnish in GarnishList)
+                    {
+                        foodItems.Add(garnish);  
+                    }
+                }
+
+                else if (line.StartsWith("Pizza:"))
+                {
+                    var pizza = ParsePizzaData(line.Substring("Pizza:".Length).Trim());
                     if (pizza != null)
                     {
                         foodItems.Add(pizza);
@@ -82,7 +104,7 @@ public class MenuLoader
                 }
                 else if (line.StartsWith("Burger:"))
                 {
-                    var burger = ParseBurgerData(line.Substring(7).Trim());
+                    var burger = ParseBurgerData(line.Substring("Burger:".Length).Trim());
                     if (burger != null)
                     {
                         foodItems.Add(burger);
@@ -139,7 +161,7 @@ public class MenuLoader
                 throw new FormatException($"Invalid price format: {pricePart}");
             }
 
-            return new Pizza(namePart, (int)price / 100);
+            return new Pizza(namePart, price / 100m);
         }
         catch (Exception ex)
         {
@@ -187,7 +209,7 @@ public class MenuLoader
                 throw new FormatException($"Invalid price format: {pricePart}");
             }
 
-            return new Burger(namePart, (int)price / 100 );
+            return new Burger(namePart, price / 100m );
         }
         catch (Exception ex)
         {
@@ -197,40 +219,71 @@ public class MenuLoader
         }
     }
 
+
     private List<Topping> ParseToppingData(string data)
     {
-        List<Topping> toppings = new List<Topping>();
-        var toppingEntries = data.Trim('<', '>').Split(new[] { ">,<" }, StringSplitOptions.RemoveEmptyEntries);
-
-        foreach (var entry in toppingEntries)
+        try
         {
-            var parts = entry.Split(',');
-            string name = parts[0].Trim();
-            if (decimal.TryParse(parts[1].Trim(), out decimal price))
+            data = data.Trim(new char[] { '[', ']' });  
+            var toppings = new List<Topping>();
+
+            
+            var entries = data.Split(new[] { ">,<" }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(e => e.Trim('<', '>')) 
+            .ToList();
+
+            foreach (var entry in entries)
             {
-                toppings.Add(new Topping(name, (int)price / 100));  
+                var parts = entry.Split(',');
+                if (parts.Length == 2)
+                {
+                    string name = parts[0].Trim();
+                    if (decimal.TryParse(parts[1].Trim(), out decimal price))
+                    {
+                        toppings.Add(new Topping(name, price / 100m ));  
+                    }
+                }
             }
+            return toppings;
         }
-        return toppings;
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error parsing the toppings data: {ex.Message}");
+            throw;
+        }
     }
-    private List<Garnish> ParseGarnishes(string data)
+    private List<Garnish> ParseGarnishData(string data)
     {
-        List<Garnish> garnishes = new List<Garnish>();
-        var garnishEntries = data.Trim('<', '>').Split(new[] { ">,<" }, StringSplitOptions.RemoveEmptyEntries);
-
-        foreach (var entry in garnishEntries)
+        try
         {
-            var parts = entry.Split(',');
-            string name = parts[0].Trim();
-            if (decimal.TryParse(parts[1].Trim(), out decimal price))
+            data = data.Trim(new char[] { '[', ']' });  
+            var garnishes = new List<Garnish>();
+
+            
+            var entries = data.Split(new[] { ">,<" }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(e => e.Trim('<', '>')) 
+            .ToList();
+
+            foreach (var entry in entries)
             {
-                garnishes.Add(new Garnish(name, (int)price / 100));  
+                var parts = entry.Split(',');
+                if (parts.Length == 2)
+                {
+                    string name = parts[0].Trim();
+                    if (decimal.TryParse(parts[1].Trim(), out decimal price))
+                    {
+                        garnishes.Add(new Garnish(name, price / 100m ));  
+                    }
+                }
             }
+            return garnishes;
         }
-        return garnishes;
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error parsing the garnish data: {ex.Message}");
+            throw;
+        }
     }
-
-
     public static bool HasAlphanumeric(string input)
         {
             return input.Any(char.IsLetterOrDigit);
