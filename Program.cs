@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-using JustNomConsoleApp;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Net;
-
-namespace JustNomConsoleApp;
+﻿namespace JustNomConsoleApp;
 
 class Program
     {
